@@ -12,4 +12,8 @@ export class JWTStrategy extends PassportStrategy(Strategy, 'jwt') {
       secretOrKey: config.get('secret_key'),
     });
   }
+  validate(payload: any) {
+    console.log(payload);
+    return payload;
+  }
 }
