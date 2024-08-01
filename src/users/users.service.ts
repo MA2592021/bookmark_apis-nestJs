@@ -37,30 +37,6 @@ export class UsersService {
     }
   }
 
-  async signIn(user: signInUser) {
-    let psMatch = false;
-    let msg = { title: 'Credintials error', field: '' };
-    const foundUser = await this.prisma.user.findUnique({
-      where: {
-        email: user.email,
-      },
-    });
-    if (foundUser) {
-      psMatch = await argon.verify(foundUser.password, user.password);
-    }
-    if (psMatch) {
-      delete foundUser.password;
-      return foundUser;
-    }
-    if (!foundUser) {
-      msg.field = 'email';
-    } else {
-      msg.field = 'password';
-    }
-
-    throw new ForbiddenException(msg);
-  }
-
   findAll() {
     return `This action returns all users`;
   }
