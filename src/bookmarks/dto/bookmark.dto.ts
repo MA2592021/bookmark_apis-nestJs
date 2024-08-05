@@ -1,11 +1,12 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { userSchemaToSend } from 'src/users/dto/user.dto';
+import { IsNotEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
+import { userSchemaToSend } from '../../users/dto/user.dto';
 export class CreateBookmarkDto {
   @IsString()
   @IsNotEmpty()
   title: string;
 
+  @IsUrl()
   @IsString()
   @IsNotEmpty()
   link: string;

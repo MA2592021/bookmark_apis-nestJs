@@ -54,13 +54,6 @@ export class signInUser {
   password: string;
 }
 
-export class user {
-  id: number;
-  name: string;
-  age: number;
-  email: string;
-}
-
 export const userSchemaToSend = {
   id: true,
   name: true,

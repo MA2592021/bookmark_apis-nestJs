@@ -1,13 +1,8 @@
-import {
-  ForbiddenException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto, userSchemaToSend } from './dto/user.dto';
 import { UpdateUserDto } from './dto/user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as argon from 'argon2';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}

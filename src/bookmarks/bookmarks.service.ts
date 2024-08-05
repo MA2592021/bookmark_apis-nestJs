@@ -4,7 +4,7 @@ import {
   CreateBookmarkDto,
   UpdateBookmarkDto,
 } from './dto/bookmark.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class BookmarksService {

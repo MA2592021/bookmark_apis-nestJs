@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto, signInUser } from '../users/dto/user.dto';
-import { PrismaClientExceptionFilter } from 'src/prisma/filters/prisma-client-exception.filter';
+import { PrismaClientExceptionFilter } from '../prisma/filters/prisma-client-exception.filter';
 
 @UseFilters(PrismaClientExceptionFilter)
 @Controller('auth')
