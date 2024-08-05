@@ -1,6 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { CreateBookmarkDto } from './dto/create-bookmark.dto';
-import { UpdateBookmarkDto } from './dto/update-bookmark.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  bookmarkSchemaToSend,
+  CreateBookmarkDto,
+  UpdateBookmarkDto,
+} from './dto/bookmark.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -15,19 +18,40 @@ export class BookmarksService {
     return bookMark;
   }
 
-  findAll() {
-    return `This action returns all bookmarks`;
+  async findAll() {
+    const bookmarks = await this.prisma.bookmark.findMany({
+      select: { ...bookmarkSchemaToSend },
+    });
+    return bookmarks;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} bookmark`;
+  async findAllForUser(id: number) {
+    return await this.prisma.bookmark.findMany({ where: { userId: id } });
   }
 
-  update(id: number, updateBookmarkDto: UpdateBookmarkDto) {
-    return `This action updates a #${id} bookmark`;
+  async findOne(id: number) {
+    const bookmarks = await this.prisma.bookmark.findUnique({
+      where: { id: id },
+      select: {
+        ...bookmarkSchemaToSend,
+      },
+    });
+    if (bookmarks) return bookmarks;
+    throw new NotFoundException();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} bookmark`;
+  async update(id: number, updateBookmarkDto: UpdateBookmarkDto) {
+    return await this.prisma.bookmark.update({
+      where: { id: id },
+      data: { ...updateBookmarkDto },
+    });
+  }
+
+  async remove(id: number) {
+    return await this.prisma.bookmark.delete({ where: { id: id } });
+  }
+
+  async removeAllForUser(id: number) {
+    return await this.prisma.bookmark.deleteMany({ where: { userId: id } });
   }
 }
