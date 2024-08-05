@@ -5,6 +5,8 @@ import {
   IsOptional,
   IsString,
   IsStrongPassword,
+  Max,
+  Min,
 } from 'class-validator';
 import { Exclude, Expose, Type } from 'class-transformer';
 import { PartialType } from '@nestjs/mapped-types';
@@ -37,6 +39,8 @@ export class CreateUserDto {
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
+  @Min(18)
+  @Max(80)
   age?: number;
 }
 
