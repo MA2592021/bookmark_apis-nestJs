@@ -1,0 +1,4 @@
+1- check for jwt if deleted user then return 401
+2- make createdBy and updatedBy
+3- make roles 
+4- pagination, fitler and sort (done)
