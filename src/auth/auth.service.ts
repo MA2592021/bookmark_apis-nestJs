@@ -23,7 +23,6 @@ export class AuthService {
         ...user,
       },
     });
-    delete Createduser.password;
 
     //return user
     return Createduser;
@@ -35,6 +34,12 @@ export class AuthService {
     const foundUser = await this.prisma.user.findUnique({
       where: {
         email: user.email,
+      },
+      select: {
+        password: true,
+        email: true,
+        name: true,
+        id: true,
       },
     });
     if (foundUser) {

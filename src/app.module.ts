@@ -6,6 +6,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { BookmarksModule } from './bookmarks/bookmarks.module';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { BookmarksModule } from './bookmarks/bookmarks.module';
     AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
     BookmarksModule,
+    CacheModule.register({ isGlobal: true }),
   ],
   controllers: [AppController],
   providers: [AppService],

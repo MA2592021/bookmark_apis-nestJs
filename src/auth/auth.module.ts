@@ -5,7 +5,7 @@ import { AuthController } from './auth.controller';
 import { JWTStrategy } from './strategy';
 
 @Module({
-  imports: [JwtModule.register({})],
+  imports: [JwtModule.register({ global: true })],
   providers: [AuthService, JWTStrategy],
   controllers: [AuthController],
 })
