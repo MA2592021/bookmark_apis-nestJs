@@ -30,7 +30,7 @@ export class AuthService {
 
   async signIn(user: signInUser) {
     let psMatch = false;
-    let msg = { title: 'Credintials error', field: '' };
+    const msg = { title: 'Credintials error', field: '' };
     const foundUser = await this.prisma.user.findUnique({
       where: {
         email: user.email,

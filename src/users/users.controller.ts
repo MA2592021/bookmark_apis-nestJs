@@ -8,7 +8,6 @@ import {
   Delete,
   UseGuards,
   UseFilters,
-  UseInterceptors,
   Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';

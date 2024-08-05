@@ -2,12 +2,11 @@ import {
   Injectable,
   ExecutionContext,
   Inject,
-  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Reflector } from '@nestjs/core';
-import { GetUser, IS_PUBLIC_KEY } from '../decorators';
+import { IS_PUBLIC_KEY } from '../decorators';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { JwtService } from '@nestjs/jwt';
