@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { ForbiddenException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserDto, signInUser } from '../users/dto/user.dto';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import * as argon from 'argon2';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
@@ -17,30 +16,17 @@ export class AuthService {
     // hash password
     const hashedPassword = await argon.hash(user.password);
     user.password = hashedPassword;
+
     //create user
-    try {
-      const Createduser = await this.prisma.user.create({
-        data: {
-          ...user,
-        },
-      });
-      delete Createduser.password;
-      //return user
-      return Createduser;
-    } catch (error) {
-      if (
-        error instanceof PrismaClientKnownRequestError &&
-        error.code == 'P2002'
-      ) {
-        console.log(error);
-        const msg = {
-          title: 'this field is taken',
-          field: error.meta.target[0],
-        };
-        throw new ForbiddenException(msg);
-      }
-      throw error;
-    }
+    const Createduser = await this.prisma.user.create({
+      data: {
+        ...user,
+      },
+    });
+    delete Createduser.password;
+
+    //return user
+    return Createduser;
   }
 
   async signIn(user: signInUser) {
