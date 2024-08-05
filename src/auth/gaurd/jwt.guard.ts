@@ -38,7 +38,7 @@ export class JWTGuard extends AuthGuard('jwt') {
       const token = authHeader.split(' ')[1];
       const decoded = this.jwtService.decode(token);
 
-      console.log(decoded);
+      // console.log(decoded);
 
       isBlocked = await this.cacheManager.get(`${decoded.id}`);
     }
