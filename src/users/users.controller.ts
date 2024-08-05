@@ -7,14 +7,18 @@ import {
   Param,
   Delete,
   UseGuards,
+  UseFilters,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, signInUser, user } from './dto/user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto } from './dto/user.dto';
 import { JWTGuard } from '../auth/gaurd';
 import { GetUser, Public } from '../auth/decorators';
+import { PrismaClientExceptionFilter } from 'src/prisma/filters/prisma-client-exception.filter';
 
 @UseGuards(JWTGuard)
+@UseFilters(PrismaClientExceptionFilter)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}

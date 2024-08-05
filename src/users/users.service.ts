@@ -3,8 +3,8 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateUserDto } from './dto/user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto, userSchemaToSend } from './dto/user.dto';
+import { UpdateUserDto } from './dto/user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
@@ -15,36 +15,23 @@ export class UsersService {
     // hash password
     const hashedPassword = await argon.hash(user.password);
     user.password = hashedPassword;
+
     //create user
-    try {
-      const Createduser = await this.prisma.user.create({
-        data: {
-          ...user,
-        },
-      });
-      delete Createduser.password;
-      //return user
-      return Createduser;
-    } catch (error) {
-      if (
-        error instanceof PrismaClientKnownRequestError &&
-        error.code == 'P2002'
-      ) {
-        console.log(error);
-        const msg = {
-          title: 'this field is taken',
-          field: error.meta.target[0],
-        };
-        throw new ForbiddenException(msg);
-      }
-      throw error;
-    }
+    const Createduser = await this.prisma.user.create({
+      data: {
+        ...user,
+      },
+    });
+    delete Createduser.password;
+
+    //return user
+    return Createduser;
   }
 
   async findAll() {
     try {
       const result = await this.prisma.user.findMany({
-        select: { password: false },
+        select: { ...userSchemaToSend },
       });
 
       return result;
@@ -58,52 +45,34 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    try {
-      const updatedUser = await this.prisma.user.update({
-        where: { id: id },
-        data: updateUserDto,
-      });
-      delete updatedUser.password;
-      return updatedUser;
-    } catch (error) {
-      if (
-        error instanceof PrismaClientKnownRequestError &&
-        error.code == 'P2025'
-      ) {
-        console.log(error);
-        throw new ForbiddenException(error.meta);
-      }
-      throw error;
-    }
+    //find user
+    const updatedUser = await this.prisma.user.update({
+      where: { id: id },
+      data: updateUserDto,
+    });
+    //delete password
+    delete updatedUser.password;
+    //return user
+    return updatedUser;
   }
 
   async remove(id: number) {
-    try {
-      const result = await this.prisma.user.delete({
-        where: {
-          id: id,
-        },
-      });
-      delete result.password;
-      return result;
-    } catch (error) {
-      if (
-        error instanceof PrismaClientKnownRequestError &&
-        error.code == 'P2025'
-      ) {
-        console.log(error);
-        throw new ForbiddenException(error.meta);
-      }
-      throw error;
-    }
+    const result = await this.prisma.user.delete({
+      where: {
+        id: id,
+      },
+    });
+    delete result.password;
+    return result;
   }
 
   async getMe(id: number) {
     const foundUser = await this.prisma.user.findUnique({
       where: { id: id },
+      select: { ...userSchemaToSend },
     });
     if (foundUser) {
-      delete foundUser.password;
+      // delete foundUser.password;
       return foundUser;
     }
     throw new NotFoundException();

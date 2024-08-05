@@ -6,7 +6,8 @@ import {
   IsString,
   IsStrongPassword,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
+import { PartialType } from '@nestjs/mapped-types';
 
 export class CreateUserDto {
   @Type(() => String)
@@ -55,3 +56,13 @@ export class user {
   age: number;
   email: string;
 }
+
+export const userSchemaToSend = {
+  id: true,
+  name: true,
+  age: true,
+  email: true,
+  password: false,
+};
+
+export class UpdateUserDto extends PartialType(CreateUserDto) {}
