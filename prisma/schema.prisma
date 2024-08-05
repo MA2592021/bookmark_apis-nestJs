@@ -32,6 +32,7 @@ model bookmark{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   title String
+  link String
   desc String?
   userId Int
   user User @relation(fields: [userId],references: [id], onDelete: Cascade) 
