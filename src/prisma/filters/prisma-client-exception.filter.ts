@@ -43,6 +43,7 @@ export class PrismaClientExceptionFilter implements ExceptionFilter {
     const errorMessage =
       PrismaErrorMessages[exception.code as keyof typeof PrismaErrorMessages] ||
       'An unknown database error occurred.';
+    console.error(exception.message);
 
     response.status(status).json({
       statusCode: status,
