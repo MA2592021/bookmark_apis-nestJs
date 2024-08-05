@@ -1,8 +1,7 @@
-Sure! Here’s an updated version of the README file that includes the section for running the application using npm commands:
 
 ---
 
-# My NestJS Project
+# Bookmarks NestJS Project
 
 ## Overview
 
