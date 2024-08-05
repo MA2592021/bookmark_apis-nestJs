@@ -4,6 +4,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { PrismaService } from '../src/prisma/prisma.service';
 import * as pactum from 'pactum';
 import { CreateUserDto } from 'src/users/dto/user.dto';
+import { CreateBookmarkDto } from 'src/bookmarks/dto/bookmark.dto';
 describe('App e2e', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -36,6 +37,17 @@ describe('App e2e', () => {
     password: '@Mir1234',
     age: 24,
   };
+  const createUserData: CreateUserDto = {
+    email: `test${getRandomNumber()}@gmail.com`,
+    name: 'amir test',
+    password: '@Mir1234',
+    age: 24,
+  };
+  const createBookMarkData: CreateBookmarkDto = {
+    title: 'test',
+    link: 'www.google.com',
+    desc: 'the best in the west',
+  };
   describe('Auth', () => {
     describe('signUp', () => {
       it('should signUp', () => {
@@ -62,12 +74,6 @@ describe('App e2e', () => {
   });
 
   describe('users', () => {
-    const createUserData: CreateUserDto = {
-      email: `test${getRandomNumber()}@gmail.com`,
-      name: 'amir test',
-      password: '@Mir1234',
-      age: 24,
-    };
     describe('getMe', () => {
       it('should get user', () => {
         return pactum
@@ -107,8 +113,8 @@ describe('App e2e', () => {
           .spec()
           .delete('/users/$S{userId}')
           .withBearerToken('$S{userToken}')
-          .expectStatus(200)
-          .inspect();
+          .expectStatus(200);
+        // .inspect();
       });
     });
     describe('edit Current user', () => {
@@ -122,19 +128,124 @@ describe('App e2e', () => {
         // .inspect();
       });
     });
-    describe('delete current user', () => {
-      it('should delete user', () => {
+    // describe('delete current user', () => {
+    //   it('should delete user', () => {
+    //     return pactum
+    //       .spec()
+    //       .delete('/users')
+    //       .withBearerToken('$S{userToken}')
+    //       .expectStatus(200);
+    //     // .inspect();
+    //   });
+    // });
+  });
+
+  describe('bookmarks', () => {
+    describe('create user for bookmark tests', () => {
+      it('should create user', () => {
         return pactum
           .spec()
-          .delete('/users')
+          .post('/users')
+          .withBody(createUserData)
           .withBearerToken('$S{userToken}')
-          .expectStatus(200)
+          .stores('userId', 'id')
+          .expectStatus(201);
+        // .inspect();
+      });
+    });
+
+    describe('create bookmarks', () => {
+      it('should create bookmark for loggedin user', () => {
+        return pactum
+          .spec()
+          .post('/bookmarks')
+          .withBody(createBookMarkData)
+          .withBearerToken('$S{userToken}')
+          .expectStatus(201)
           .inspect();
+      });
+      it('should create bookmark for created user', () => {
+        return pactum
+          .spec()
+          .post('/bookmarks/$S{userId}')
+          .withBody(createBookMarkData)
+          .withBearerToken('$S{userToken}')
+          .stores('bookmarkId', 'id')
+          .expectStatus(201);
+        // .inspect();
+      });
+    });
+
+    describe('get bookmark', () => {
+      it('should get all bookmarks', () => {
+        return pactum
+          .spec()
+          .get('/bookmarks/')
+          .withBearerToken('$S{userToken}')
+          .expectStatus(200);
+        // .inspect();
+      });
+
+      it('should get all bookmarks for created user', () => {
+        return pactum
+          .spec()
+          .get('/bookmarks/user/$S{userId}')
+          .withBearerToken('$S{userToken}')
+          .expectStatus(200);
+        // .inspect();
+      });
+      it('should get all bookmarks for current user', () => {
+        return pactum
+          .spec()
+          .get('/bookmarks/user')
+          .withBearerToken('$S{userToken}')
+          .expectStatus(200);
+        // .inspect();
+      });
+    });
+
+    describe('edit bookmark', () => {
+      it('should edit bookmark', () => {
+        return pactum
+          .spec()
+          .patch('/bookmarks/$S{bookmarkId}')
+          .withBody({
+            title: createBookMarkData.title + 'ss',
+          })
+          .withBearerToken('$S{userToken}')
+          .expectStatus(200);
+        // .inspect();
+      });
+    });
+    describe('delete bookmark', () => {
+      it('should delete bookmark', () => {
+        return pactum
+          .spec()
+          .delete('/bookmarks/$S{bookmarkId}')
+          .withBearerToken('$S{userToken}')
+          .expectStatus(200);
+        // .inspect();
+      });
+      it('should delete all bookmarks for loggedin user', () => {
+        return pactum
+          .spec()
+          .delete('/bookmarks/user')
+          .withBearerToken('$S{userToken}')
+          .expectStatus(200);
+        // .inspect();
+      });
+    });
+    describe('delete created user ', () => {
+      it('should delete user with all his bookmarks', () => {
+        return pactum
+          .spec()
+          .delete('/users/$S{userId}')
+          .withBearerToken('$S{userToken}')
+          .expectStatus(200);
+        // .inspect();
       });
     });
   });
-
-  describe('bookmarks', () => {});
 
   it.todo('should Pass');
 });
