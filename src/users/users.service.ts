@@ -1,11 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateUserDto, userSchemaToSend } from './dto/user.dto';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { CreateUserDto, QueryDto, userSchemaToSend } from './dto/user.dto';
 import { UpdateUserDto } from './dto/user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as argon from 'argon2';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) {}
   async create(user: CreateUserDto) {
     // hash password
     const hashedPassword = await argon.hash(user.password);
@@ -23,20 +28,40 @@ export class UsersService {
     return Createduser;
   }
 
-  async findAll() {
-    try {
-      const result = await this.prisma.user.findMany({
-        select: { ...userSchemaToSend },
-      });
-
-      return result;
-    } catch (error) {
-      console.log(error);
+  async findAll({
+    sortBy,
+    sortOrder,
+    filter,
+    filterBy,
+    page,
+    pageSize,
+  }: QueryDto) {
+    let where = {};
+    let skip = 0;
+    if (filterBy) {
+      where = {
+        [filterBy]: filter,
+      };
     }
+    if (page) {
+      skip = (page - 1) * pageSize;
+    }
+    const result = await this.prisma.user.findMany({
+      // select: { ...userSchemaToSend },
+      omit: { password: true },
+      orderBy: [{ [sortBy]: sortOrder }],
+      where,
+      skip,
+      take: pageSize,
+    });
+
+    return result;
   }
 
   async findOne(id: number) {
-    return await this.prisma.user.findUnique({ where: { id: id } });
+    return await this.prisma.user.findUnique({
+      where: { id: id },
+    });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
@@ -44,9 +69,8 @@ export class UsersService {
     const updatedUser = await this.prisma.user.update({
       where: { id: id },
       data: updateUserDto,
+      omit: { password: true },
     });
-    //delete password
-    delete updatedUser.password;
     //return user
     return updatedUser;
   }
@@ -57,7 +81,7 @@ export class UsersService {
         id: id,
       },
     });
-    delete result.password;
+    await this.cacheManager.set(`${result.id}`, result.id, 15 * 60 * 1000);
     return result;
   }
 

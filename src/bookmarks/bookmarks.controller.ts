@@ -8,9 +8,14 @@ import {
   Delete,
   UseGuards,
   UseFilters,
+  Query,
 } from '@nestjs/common';
 import { BookmarksService } from './bookmarks.service';
-import { CreateBookmarkDto, UpdateBookmarkDto } from './dto/bookmark.dto';
+import {
+  CreateBookmarkDto,
+  QueryDto,
+  UpdateBookmarkDto,
+} from './dto/bookmark.dto';
 import { JWTGuard } from '../auth/gaurd';
 import { GetUser } from '../auth/decorators';
 import { PrismaClientExceptionFilter } from '../prisma/filters/prisma-client-exception.filter';
@@ -37,8 +42,8 @@ export class BookmarksController {
   }
 
   @Get()
-  findAll() {
-    return this.bookmarksService.findAll();
+  findAll(@Query() query: QueryDto) {
+    return this.bookmarksService.findAll(query);
   }
 
   @Get('user/:id')

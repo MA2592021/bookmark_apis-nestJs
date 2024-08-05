@@ -1,5 +1,6 @@
 import {
   IsEmail,
+  IsIn,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -8,7 +9,7 @@ import {
   Max,
   Min,
 } from 'class-validator';
-import { Exclude, Expose, Type } from 'class-transformer';
+import { Type } from 'class-transformer';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class CreateUserDto {
@@ -55,11 +56,38 @@ export class signInUser {
 }
 
 export const userSchemaToSend = {
+  //used before prisma omit
   id: true,
   name: true,
   age: true,
   email: true,
   password: false,
 };
+export class QueryDto {
+  @IsOptional()
+  @IsIn(['name', 'age', 'email', 'createdAt', 'updatedAt'])
+  sortBy?: string;
+
+  @IsOptional()
+  @IsIn(['asc', 'desc'])
+  sortOrder?: string;
+
+  @IsOptional()
+  @IsIn(['name', 'age', 'createdAt', 'updatedAt']) //didnt include email because email is unique
+  filterBy?: string;
+
+  @IsOptional()
+  filter?: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Type(() => Number)
+  page?: number;
+
+  @IsOptional()
+  @IsNumber()
+  @Type(() => Number)
+  pageSize?: number;
+}
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {}

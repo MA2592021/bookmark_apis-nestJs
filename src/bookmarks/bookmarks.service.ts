@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import {
   bookmarkSchemaToSend,
   CreateBookmarkDto,
+  QueryDto,
   UpdateBookmarkDto,
 } from './dto/bookmark.dto';
 import { PrismaService } from '../prisma/prisma.service';
@@ -18,9 +19,34 @@ export class BookmarksService {
     return bookMark;
   }
 
-  async findAll() {
+  async findAll({
+    filter,
+    filterBy,
+    sortBy,
+    sortOrder,
+    page,
+    pageSize,
+  }: QueryDto) {
+    let where = {};
+    let skip = 0;
+    if (filterBy) {
+      where = {
+        [filterBy]: filter,
+      };
+    }
+    if (page) {
+      skip = (page - 1) * pageSize;
+    }
     const bookmarks = await this.prisma.bookmark.findMany({
-      select: { ...bookmarkSchemaToSend },
+      // select: { ...bookmarkSchemaToSend },
+      include: { user: true },
+
+      where,
+      orderBy: {
+        [sortBy]: sortOrder,
+      },
+      skip,
+      take: pageSize,
     });
     return bookmarks;
   }

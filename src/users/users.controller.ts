@@ -9,9 +9,10 @@ import {
   UseGuards,
   UseFilters,
   UseInterceptors,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/user.dto';
+import { CreateUserDto, QueryDto } from './dto/user.dto';
 import { UpdateUserDto } from './dto/user.dto';
 import { JWTGuard } from '../auth/gaurd';
 import { GetUser } from '../auth/decorators';
@@ -28,8 +29,8 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  findAll(@Query() query: QueryDto) {
+    return this.usersService.findAll(query);
   }
 
   @Get('/getMe')
