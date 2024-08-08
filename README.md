@@ -1,17 +1,15 @@
-Sure! Here’s a Markdown-compatible version of the README file for your `README.md`:
 
 ---
 
-# My NestJS Project
+# Bookmarks NestJS Project
 
 ## Overview
 
-This is a NestJS application designed to handle [briefly describe the purpose of your application, e.g., user management, an API for a web app, etc.]. It is built with TypeScript and utilizes Prisma ORM with PostgreSQL for database management. The application is Dockerized for easy deployment and consistency across environments.
+This is a NestJS application designed to handle an API for users Bookmarks . It is built with TypeScript and utilizes Prisma ORM with PostgreSQL for database management. The application is Dockerized for easy deployment and consistency across environments.
 
 ## Features
 
 - User authentication using JWT
-- CSRF protection
 - Caching with cache-manager
 - REST API endpoints
 - Docker support for containerization
@@ -49,7 +47,6 @@ secret_key = "Super-secret"
 exp_date = "15m"
 ```
 
-
 ## Running the Application
 
 ### Using Docker
@@ -78,6 +75,34 @@ exp_date = "15m"
 
    This will start both the NestJS application and the PostgreSQL database.
 
+### Using npm Commands
+
+1. **Start the Application in Development Mode (shortcut)**
+
+   ```bash
+   npm run start:dev:root
+   ```
+
+   or
+
+   ```bash
+   npm run db:dev:up
+   ```
+
+2. **Migrate the Database**
+
+   ```bash
+   npm run db:dev:deploy
+   ```
+
+3. **Start the Application**
+
+   ```bash
+   npm run start:dev
+   ```
+
+   This will start the application in development mode, watching for changes and automatically restarting.
+
 ## Running Tests
 
 To run the tests for the application, use:
@@ -86,17 +111,13 @@ To run the tests for the application, use:
 npm test:e2e
 ```
 
-## CSRF Protection
-
-CSRF protection is enabled using [NestJS's CSRF module](https://docs.nestjs.com/security/csrf). Ensure your client-side requests include the CSRF token provided by the server.
-
 ## Caching
 
 Caching is implemented using [cache-manager](https://www.npmjs.com/package/cache-manager). Configure caching behavior through environment variables and NestJS’s caching module.
 
 ## Code Style
 
-- We use [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) for code formatting and linting.
+- I use [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) for code formatting and linting.
 
 ## Contributing
 
@@ -108,4 +129,5 @@ If you would like to contribute to this project, please follow these steps:
 4. Push to the branch: `git push origin feature/your-feature`.
 5. Create a new Pull Request.
 
-##
+---
+
