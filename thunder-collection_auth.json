@@ -1,0 +1,53 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "auth",
+    "collectionId": "6cddfa4e-660c-4a8d-b6de-742a70b111c7",
+    "dateExported": "2024-08-08T15:17:31.754Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "8a651602-6e28-43cf-b1d9-fa63d6336984",
+            "colId": "6cddfa4e-660c-4a8d-b6de-742a70b111c7",
+            "containerId": "",
+            "name": "signup",
+            "url": "localhost:3000/auth/signup",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-08-05T12:26:18.886Z",
+            "modified": "2024-08-05T12:26:18.886Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"{{name}}\",\n  \"email\":\"{{email}}\",\n  \"password\":\"{{password}}\",\n  \"age\":\"{{age}}\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "49311705-381d-4764-b080-ad414bfd97a6",
+            "colId": "6cddfa4e-660c-4a8d-b6de-742a70b111c7",
+            "containerId": "",
+            "name": "signIn",
+            "url": "localhost:3000/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-08-05T12:26:26.895Z",
+            "modified": "2024-08-05T12:44:16.055Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"{{email}}\",\n  \"password\":\"{{password}}\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "set-env-var",
+                    "custom": "json.access_token",
+                    "action": "setto",
+                    "value": "{{jwt,global}}"
+                }
+            ]
+        }
+    ],
+    "ref": "eM53oYPr7r7bLzrB0PEu4Fim8CjD8Y9hXUEQ3VgJ2uCyVRBJ--yyYYtHZGcDerlP-HHHL5tFCeyCSOsNJWHQbQ"
+}

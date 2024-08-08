@@ -1,0 +1,137 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "usersBookmarks",
+    "collectionId": "ab20e238-55b5-404f-8418-d1cec4786783",
+    "dateExported": "2024-08-08T15:17:55.660Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "0dc785ea-3280-424a-9296-1976ab5ab2d1",
+            "colId": "ab20e238-55b5-404f-8418-d1cec4786783",
+            "containerId": "",
+            "name": "getAll",
+            "url": "localhost:3000/users?sortBy=age&sortOrder=desc",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-08-05T12:28:32.490Z",
+            "modified": "2024-08-05T17:34:20.638Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "sortBy",
+                    "value": "age",
+                    "isPath": false
+                },
+                {
+                    "name": "sortOrder",
+                    "value": "desc",
+                    "isPath": false
+                },
+                {
+                    "name": "filterBy",
+                    "value": "email",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "filter",
+                    "value": "7azem@gmail.com",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "pageSize",
+                    "value": "2",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        },
+        {
+            "_id": "5285dffb-1ff0-42ce-991c-2930d80f50e6",
+            "colId": "ab20e238-55b5-404f-8418-d1cec4786783",
+            "containerId": "",
+            "name": "getMe",
+            "url": "localhost:3000/users/getMe",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-08-05T12:28:42.074Z",
+            "modified": "2024-08-05T12:28:42.074Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        },
+        {
+            "_id": "fd422923-050f-4360-8e35-dcf801481c49",
+            "colId": "ab20e238-55b5-404f-8418-d1cec4786783",
+            "containerId": "",
+            "name": "update user",
+            "url": "localhost:3000/users/5",
+            "method": "PATCH",
+            "sortNum": 30000,
+            "created": "2024-08-05T12:28:53.969Z",
+            "modified": "2024-08-05T12:28:53.969Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"amigos55\",\n  \"age\":555,\n  \"email\":\"ass@gmail.com\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        },
+        {
+            "_id": "e79ab495-f0b2-45c1-99be-1be1176d6af7",
+            "colId": "ab20e238-55b5-404f-8418-d1cec4786783",
+            "containerId": "",
+            "name": "delete user",
+            "url": "localhost:3000/users/3",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-08-05T12:29:02.446Z",
+            "modified": "2024-08-05T19:21:50.506Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        },
+        {
+            "_id": "39ef2e82-70bf-450c-9f48-95a328e71a50",
+            "colId": "ab20e238-55b5-404f-8418-d1cec4786783",
+            "containerId": "",
+            "name": "create user",
+            "url": "localhost:3000/users/",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-08-05T12:36:19.058Z",
+            "modified": "2024-08-05T12:43:06.463Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"{{#name}}\",\n  \"email\":\"{{#email}}\",\n  \"age\":\"{{#number,18,60}}\",\n  \"password\":\"@Samir1234\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        }
+    ],
+    "ref": "WzngwekiHQ_XMkESnuC4TyzcmJJlBH92hLStebmfzIdiwPwuXWm-lE05j3sqc_MAMMnP7zcayjh4mQTZVx-6uw"
+}

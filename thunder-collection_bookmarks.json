@@ -1,0 +1,190 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "bookmarks",
+    "collectionId": "115e0f76-b38c-4cfa-92ad-1d52515ad6fc",
+    "dateExported": "2024-08-08T15:17:45.167Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "ca9daed2-a0f7-4590-b8eb-c13e82d3048d",
+            "colId": "115e0f76-b38c-4cfa-92ad-1d52515ad6fc",
+            "containerId": "",
+            "name": "get all for user",
+            "url": "localhost:3000/bookmarks/user/1",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-08-05T12:26:58.020Z",
+            "modified": "2024-08-05T12:26:58.020Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        },
+        {
+            "_id": "cfe19e1f-98a9-4841-8454-46527bafc513",
+            "colId": "115e0f76-b38c-4cfa-92ad-1d52515ad6fc",
+            "containerId": "",
+            "name": "delete bookmark",
+            "url": "localhost:3000/bookmarks/4",
+            "method": "DELETE",
+            "sortNum": 20000,
+            "created": "2024-08-05T12:27:03.805Z",
+            "modified": "2024-08-05T12:27:03.805Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        },
+        {
+            "_id": "af84d236-2d08-4d44-be47-1bc337df8bb3",
+            "colId": "115e0f76-b38c-4cfa-92ad-1d52515ad6fc",
+            "containerId": "",
+            "name": "update bookmark",
+            "url": "localhost:3000/bookmarks/3",
+            "method": "PATCH",
+            "sortNum": 30000,
+            "created": "2024-08-05T12:27:10.410Z",
+            "modified": "2024-08-05T12:27:10.410Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"test lest hest\",\n  \"desc\":\"asdawdasd\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        },
+        {
+            "_id": "02797a91-f54a-438e-9945-91686317c37a",
+            "colId": "115e0f76-b38c-4cfa-92ad-1d52515ad6fc",
+            "containerId": "",
+            "name": "get bookmark by id",
+            "url": "localhost:3000/bookmarks/4",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-08-05T12:27:17.217Z",
+            "modified": "2024-08-05T12:27:17.217Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        },
+        {
+            "_id": "c189ed19-5196-4af2-bf4f-997a22afce21",
+            "colId": "115e0f76-b38c-4cfa-92ad-1d52515ad6fc",
+            "containerId": "",
+            "name": "create bookmark",
+            "url": "localhost:3000/bookmarks/",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-08-05T12:27:24.766Z",
+            "modified": "2024-08-05T12:27:24.766Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"test\",\n  \"link\":\"www.google.com\",\n  \"desc\":\"test best\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        },
+        {
+            "_id": "6ae5e5e9-13d1-4685-bf52-ddac4a36d20a",
+            "colId": "115e0f76-b38c-4cfa-92ad-1d52515ad6fc",
+            "containerId": "",
+            "name": "get all",
+            "url": "localhost:3000/bookmarks?sortBy=createdAt&sortOrder=desc",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-08-05T12:44:38.467Z",
+            "modified": "2024-08-05T17:54:45.804Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "sortBy",
+                    "value": "createdAt",
+                    "isPath": false
+                },
+                {
+                    "name": "sortOrder",
+                    "value": "desc",
+                    "isPath": false
+                },
+                {
+                    "name": "filterBy",
+                    "value": "title",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "filter",
+                    "value": "test",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "pageSize",
+                    "value": "5",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        },
+        {
+            "_id": "aff1a061-5dfc-4792-8b0a-0a03a249177b",
+            "colId": "115e0f76-b38c-4cfa-92ad-1d52515ad6fc",
+            "containerId": "",
+            "name": "delete all for current user",
+            "url": "localhost:3000/bookmarks/user",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2024-08-05T13:16:38.366Z",
+            "modified": "2024-08-05T13:17:01.465Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        },
+        {
+            "_id": "c3559efe-f6af-4249-8f8f-60b469af7e80",
+            "colId": "115e0f76-b38c-4cfa-92ad-1d52515ad6fc",
+            "containerId": "",
+            "name": "create bookmark for other user",
+            "url": "localhost:3000/bookmarks/16",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2024-08-05T13:21:46.738Z",
+            "modified": "2024-08-05T13:23:55.302Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"test\",\n  \"link\":\"www.google.com\"\n\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{jwt}}"
+            }
+        }
+    ],
+    "ref": "zO5E33M0wvxKn5RCntI7Qvv6yUOYw9nMj3sNrv1vR6XPbt85QwilPUgcjJ3--Sej5nx2h4aYnBk5Yr2slA6Brg"
+}
