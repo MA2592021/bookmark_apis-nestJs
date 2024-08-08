@@ -1,0 +1,62 @@
+{
+    "info": {
+        "_postman_id": "ece7aef4-1f9a-49c1-b6ba-056ca5e5463d",
+        "name": "auth",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "signup",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "localhost:3000/auth/signup",
+                    "path": [
+                        "auth",
+                        "signup"
+                    ],
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"name\":\"{{name}}\",\n  \"email\":\"{{email}}\",\n  \"password\":\"{{password}}\",\n  \"age\":\"{{age}}\"\n}"
+                }
+            }
+        },
+        {
+            "name": "signIn",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "localhost:3000/auth/login",
+                    "path": [
+                        "auth",
+                        "login"
+                    ],
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"email\":\"{{email}}\",\n  \"password\":\"{{password}}\"\n}"
+                }
+            }
+        }
+    ]
+}

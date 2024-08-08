@@ -1,0 +1,192 @@
+{
+    "info": {
+        "_postman_id": "c36ce1cd-e8d2-4ef7-9800-4b87a2fbee1b",
+        "name": "usersBookmarks",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "getAll",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "localhost:3000/users?sortBy=age&sortOrder=desc",
+                    "query": [
+                        {
+                            "key": "sortBy",
+                            "value": "age"
+                        },
+                        {
+                            "key": "sortOrder",
+                            "value": "desc"
+                        },
+                        {
+                            "key": "filterBy",
+                            "value": "email",
+                            "disabled": true
+                        },
+                        {
+                            "key": "filter",
+                            "value": "7azem@gmail.com",
+                            "disabled": true
+                        },
+                        {
+                            "key": "page",
+                            "value": "2",
+                            "disabled": true
+                        },
+                        {
+                            "key": "pageSize",
+                            "value": "2",
+                            "disabled": true
+                        }
+                    ],
+                    "variable": [],
+                    "path": [
+                        "users"
+                    ],
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                },
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{jwt}}",
+                            "type": "string"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "getMe",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "localhost:3000/users/getMe",
+                    "path": [
+                        "users",
+                        "getMe"
+                    ],
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                },
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{jwt}}",
+                            "type": "string"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "update user",
+            "request": {
+                "method": "PATCH",
+                "url": {
+                    "raw": "localhost:3000/users/5",
+                    "path": [
+                        "users",
+                        "5"
+                    ],
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"name\":\"amigos55\",\n  \"age\":555,\n  \"email\":\"ass@gmail.com\"\n}"
+                },
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{jwt}}",
+                            "type": "string"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "delete user",
+            "request": {
+                "method": "DELETE",
+                "url": {
+                    "raw": "localhost:3000/users/3",
+                    "path": [
+                        "users",
+                        "3"
+                    ],
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                },
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{jwt}}",
+                            "type": "string"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "create user",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "localhost:3000/users/",
+                    "path": [
+                        "users"
+                    ],
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"name\":\"{{#name}}\",\n  \"email\":\"{{#email}}\",\n  \"age\":\"{{#number,18,60}}\",\n  \"password\":\"@Samir1234\"\n}"
+                },
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{jwt}}",
+                            "type": "string"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
